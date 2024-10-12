@@ -1,0 +1,94 @@
+# 忽略 Python 虚拟环境和依赖
+venv/
+env/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+*.egg
+*.dat
+*.pt
+
+# 忽略 C++ 编译生成的文件
+*.o
+*.obj
+*.dll
+*.exe
+*.so
+*.dylib
+*.a
+*.lib
+*.bin
+*.elf
+
+# 忽略 Node.js 依赖
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# 忽略 Java 编译生成的文件
+*.class
+*.jar
+*.war
+*.ear
+
+# 忽略 Go 编译生成的文件
+*.exe
+*.test
+*.out
+
+# 忽略 Rust 编译生成的文件
+target/
+
+# 忽略 .NET 编译生成的文件
+bin/
+obj/
+*.pdb
+*.exe
+*.dll
+
+# 忽略 Mac OS 文件
+.DS_Store
+
+# 忽略 Linux 文件
+*.swp
+*.swo
+
+# 忽略各种日志文件
+*.log
+
+# 忽略 IDE 生成的文件
+.vscode/
+.idea/
+*.iml
+*.sublime*
+
+# 忽略构建系统文件
+build/
+dist/
+*.bak
+*.tmp
+*.log
+
+# 忽略 docker 和虚拟化文件
+docker-compose.override.yml
+*.dockerfile
+
+# 忽略临时文件
+*.tmp
+*.temp
+*.log
+*.diff
+*.patch
+
+# 忽略其他常见库和工具生成的文件
+/.cache/
+/out/
+/coverage/
+*.cover
+*.cov
+*.gcov
+
+
