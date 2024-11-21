@@ -27,11 +27,13 @@ inline void twoDimWrite(std::vector<float> &tensor, int &x, int &y, const int &s
 // Step #2: Implement Read/Write Accessors for a 4D Tensor
 inline float fourDimRead(std::vector<float> &tensor, int &x, int &y, int &z, int &b, 
         const int &sizeX, const int &sizeY, const int &sizeZ) {
-    return 0.0;
+    reurn tensor[b * (sizeX * sizeY * sizeZ) + z * (sizeX * sizeY) + y * sizeX + x];
 }
 
 inline void fourDimWrite(std::vector<float> &tensor, int &x, int &y, int &z, int &b, 
         const int &sizeX, const int &sizeY, const int &sizeZ, float &val) {
+
+    tensor[b * (sizeX * sizeY * sizeZ) + z * (sizeX * sizeY) + y * sizeX + x] = val;
     return; 
 }
 
@@ -89,27 +91,20 @@ torch::Tensor myNaiveAttention(torch::Tensor QTensor, torch::Tensor KTensor, tor
     //Format QK_t Tensor into a 2D vector.
     std::vector<float> QK_t = formatTensor(QK_tTensor);
     
-    /* Here is an example of how to read/write 0's to  Q (B, H, N, d) using the 4D accessors
+    /* Here is an example of how to read/write 0's to  Q (B, H, N, d) using the 4D accessors*/
 
-        //loop over Batch Size
-         for (int b = 0; b < B; b++) {
+    
+    for(int b = 0; b < B; b++){
+        for(int h = 0; h < H; h++){
+            for(int i = 0; i < N; i++){
 
-             //loop over Heads
-             for (int h = 0; h < H; h++) {
-
-                 //loop over Sequence Length
-                 for (int i = 0; i < N; i++) {
-
-                     //loop over Embedding Dimensionality
-                     for (int j = 0; j < d; j++) {
-                        float val = fourDimRead(Q, b, h, i, j, H, N, d);
-                        val = 0.0;
-                        fourDimWrite(Q, b, h, i, j, H, N, d, val);
-                     }
-                 }
-             }
-         }
-    */
+                for(int j = 0; j < d; j++){
+                    float q = fourDimRead(Q, b, h, i, j, H, N, d);
+                    
+                    for(int ii = 0; ii < d; ii++){
+                        for(jj = 0; jj < N; jj++){
+                        float key = fourDimRead(K, b, h, ii, jj, H, N, d);
+    }
 
     /* Here is an example of how to read/write 0's to  QK_t (N, N) using the 2D accessors
 
