@@ -93,17 +93,22 @@ torch::Tensor myNaiveAttention(torch::Tensor QTensor, torch::Tensor KTensor, tor
     
     /* Here is an example of how to read/write 0's to  Q (B, H, N, d) using the 4D accessors*/
 
-    
     for(int b = 0; b < B; b++){
         for(int h = 0; h < H; h++){
             for(int i = 0; i < N; i++){
-
-                for(int j = 0; j < d; j++){
-                    float q = fourDimRead(Q, b, h, i, j, H, N, d);
-                    
-                    for(int ii = 0; ii < d; ii++){
-                        for(jj = 0; jj < N; jj++){
-                        float key = fourDimRead(K, b, h, ii, jj, H, N, d);
+                for(int j = 0; j < N;j++){
+                    double sum = 0;
+                    for(int k = 0; k < d; k++){
+                        double q = fourDimRead(Q, i, k, h, b, H, N, d);
+                        double key = fourDimRead(K, k, j, h, b, d, N, H);
+                        sum += q * key;
+                    }
+                    twoDimWrite(QK_t, i, j, N, sum);
+                }
+                
+            }
+        }
+                        
     }
 
     /* Here is an example of how to read/write 0's to  QK_t (N, N) using the 2D accessors
